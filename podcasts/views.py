@@ -24,8 +24,10 @@ def new_feed(request):
         # POST data submitted; process data.
         form = FeedForm(request.POST)
         if form.is_valid():
+            new_feed = form.save(commit=False)
+            new_feed.owner = request.user
             form.save()
-            return HttpResponseRedirect(reverse('podcasts:home'))
+            return HttpResponseRedirect(reverse('home'))
 
     context = {'form': form}
     return render(request, 'new_feed.html', context)
