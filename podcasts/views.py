@@ -2,6 +2,7 @@ from django.views.generic import ListView
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 from .models import Episode, Feed
 from .forms import FeedForm
@@ -15,6 +16,7 @@ class HomePageView(ListView):
         context["episodes"] = Episode.objects.filter().order_by("-pub_date")[:25]
         return context
 
+@login_required
 def new_feed(request):
     """Add a new feed."""
     if request.method != 'POST':
