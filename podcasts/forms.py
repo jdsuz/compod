@@ -6,4 +6,4 @@ class FeedForm(forms.ModelForm):
 
     class Meta:
         model = Feed
-        fields = ('source',)
+        fields = ('source', 'podcast_name',)
